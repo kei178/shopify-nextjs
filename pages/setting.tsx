@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import {
   Button,
   Card,
@@ -8,22 +8,40 @@ import {
   Page,
   Stack,
   TextField,
+  Frame,
+  Toast,
 } from '@shopify/polaris';
 
 const Setting = (): JSX.Element => {
   const defaultDiscount: string = '0%';
-  const [discount, setDiscount]: [string, any] = useState(defaultDiscount);
+  const [discount, setDiscount] = useState<string>(defaultDiscount);
+  const [active, setActive] = useState<boolean>(false);
+  const [toastContent, setToastContent] = useState<string | null>(null);
 
   const img: string =
     'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
-  const handleSubmit = (): void => {
-    // TODO:
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    console.log('e', e);
+
+    setToastContent('保存しました。');
+    toggleActive();
   };
 
-  const handleChange = (e): void => {
-    // TODO:
+  const handleChange = (value: string, _id: string): void => {
+    setDiscount(value);
   };
+
+  const toggleActive: () => void = useCallback(
+    () => setActive((active) => !active),
+    []
+  );
+
+  const toastMarkup: JSX.Element | null =
+    active && toastContent ? (
+      <Toast content={toastContent} onDismiss={toggleActive} />
+    ) : null;
 
   return (
     <Page>
@@ -39,7 +57,6 @@ const Setting = (): JSX.Element => {
                   value={discount}
                   onChange={handleChange}
                   label="Discount percentage"
-                  type="discount"
                 />
                 <Stack distribution="trailing">
                   <Button primary submit>
@@ -49,6 +66,7 @@ const Setting = (): JSX.Element => {
               </FormLayout>
             </Form>
           </Card>
+          <Frame>{toastMarkup}</Frame>
         </Layout.AnnotatedSection>
       </Layout>
     </Page>
