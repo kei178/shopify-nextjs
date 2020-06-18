@@ -12,7 +12,7 @@ import {
   Toast,
 } from '@shopify/polaris';
 
-const Setting = (): JSX.Element => {
+const Setting = () => {
   const defaultDiscount: string = '0%';
   const [discount, setDiscount] = useState<string>(defaultDiscount);
   const [active, setActive] = useState<boolean>(false);
