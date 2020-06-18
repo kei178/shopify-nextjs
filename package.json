@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node server.ts",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.ts"
   },
   "dependencies": {
     "@shopify/app-bridge-react": "^1.24.0",
     "@shopify/koa-shopify-auth": "^3.1.63",
     "@shopify/koa-shopify-graphql-proxy": "^4.0.0",
     "@shopify/polaris": "^4.25.1",
+    "@types/isomorphic-fetch": "^0.0.35",
     "@zeit/next-css": "^1.0.1",
     "apollo-boost": "^0.4.9",
     "dotenv": "^8.2.0",

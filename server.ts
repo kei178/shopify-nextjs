@@ -1,4 +1,4 @@
-import 'isomorphic-fetch';
+require('isomorphic-fetch');
 
 const dotenv = require('dotenv');
 const Koa = require('koa');
